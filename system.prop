@@ -47,5 +47,8 @@ persist.radio.add_power_save=1
 persist.radio.apm_sim_not_pwdn=1
 ro.telephony.call_ring.multiple=false
 
+# SurfaceFlinger
+ro.surface_flinger.protected_contents=true
+
 # Wi-Fi
 wifi.interface=wlan0
