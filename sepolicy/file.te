@@ -1,2 +1,2 @@
 type firmware_file, file_type;
-type tmp_root_mount_file, file_type;
+type persist_file, file_type;
