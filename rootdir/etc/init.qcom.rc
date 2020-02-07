@@ -213,7 +213,6 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     -g@android:wpa_wlan0
     interface android.hardware.wifi.supplicant@1.0::ISupplicant default
     interface android.hardware.wifi.supplicant@1.1::ISupplicant default
-    interface android.hardware.wifi.supplicant@1.2::ISupplicant default
     class main
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
@@ -225,10 +224,12 @@ service ril-daemon2 /vendor/bin/hw/rild -c 2
     group radio cache inet misc audio log readproc wakelock
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
 
-service charger /charger
+service charger /system/bin/charger
     class charger
-    group log
-    seclabel u:r:healthd:s0
+    user system
+    group system graphics input
+    capabilities SYS_BOOT
+    seclabel u:r:charger:s0
 
 # start camera server as daemon
 service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
@@ -302,6 +303,6 @@ service wcnss-service /system/vendor/bin/wcnss_service
 service qcom-mem /system/vendor/bin/init.qcom.mem.sh
     disabled
     oneshot
-    
+
 on property:apexd.status=ready
     mount none /system/etc/swcodec/ld.config.txt /apex/com.android.media.swcodec/etc/ld.config.txt bind
